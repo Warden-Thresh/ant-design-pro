@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { formatMessage } from 'umi/locale';
 import { Popover, Icon, Tabs, Badge, Spin } from 'antd';
 import classNames from 'classnames';
 import List from './NoticeList';
@@ -16,8 +17,8 @@ export default class NoticeIcon extends PureComponent {
     onClear: () => {},
     loading: false,
     locale: {
-      emptyText: '暂无数据',
-      clear: '清空',
+      emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
+      clear: formatMessage({ id: 'component.noticeIcon.clear' }),
     },
     emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
   };
@@ -43,12 +44,12 @@ export default class NoticeIcon extends PureComponent {
           ? `${child.props.title} (${child.props.list.length})`
           : child.props.title;
       return (
-        <TabPane tab={title} key={child.props.title}>
+        <TabPane tab={title} key={child.props.name}>
           <List
             {...child.props}
             data={child.props.list}
             onClick={item => this.onItemClick(item, child.props)}
-            onClear={() => onClear(child.props.title)}
+            onClear={() => onClear(child.props.name)}
             title={child.props.title}
             locale={locale}
           />
